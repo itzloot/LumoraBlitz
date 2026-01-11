@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LumoraBlitz | Premium Templates</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        background: '#09090b',
+                        surface: '#18181b',
+                        primary: '#3b82f6',
+                        accent: '#2563eb'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #09090b; color: white; }
+        .glass { background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .card-hover:hover { transform: translateY(-5px); border-color: rgba(59, 130, 246, 0.5); box-shadow: 0 10px 40px -10px rgba(59, 130, 246, 0.2); }
+    </style>
+</head>
+<body class="antialiased selection:bg-blue-500/30">
+
+    <nav class="fixed top-0 z-50 w-full glass">
+        <div class="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
+            <a href="#" class="flex items-center gap-2">
+                <div class="rounded-lg bg-blue-600 p-1.5">
+                    <i data-lucide="zap" class="h-5 w-5 text-white"></i>
+                </div>
+                <span class="text-xl font-bold tracking-tight text-white">
+                    Lumora<span class="text-blue-500">Blitz</span>
+                </span>
+            </a>
+            <div class="hidden md:flex gap-8 text-sm font-medium text-zinc-400">
+                <a href="#" class="hover:text-white transition">Templates</a>
+                <a href="#" class="hover:text-white transition">Pricing</a>
+            </div>
+            <button class="rounded-full bg-white px-5 py-2 text-sm font-bold text-black hover:bg-gray-200 transition">
+                Get All Access
+            </button>
+        </div>
+    </nav>
+
+    <section class="relative pt-32 pb-20 px-6 text-center overflow-hidden">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-blue-600/20 blur-[120px] -z-10 rounded-full opacity-50 pointer-events-none"></div>
+
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-blue-400 mb-8">
+            <span class="relative flex h-2 w-2">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+            </span>
+            v2.0 is live
+        </div>
+        
+        <h1 class="text-5xl md:text-7xl font-bold tracking-tight mb-6 bg-gradient-to-b from-white to-zinc-500 bg-clip-text text-transparent">
+            Build faster with <br> LumoraBlitz.
+        </h1>
+        
+        <p class="text-lg text-zinc-400 max-w-2xl mx-auto mb-10">
+            Premium landing page templates built for performance. No setup required.
+        </p>
+
+        <div class="flex justify-center gap-4">
+            <a href="#browse" class="bg-blue-600 hover:bg-blue-500 text-white px-8 py-3 rounded-xl font-bold transition-all shadow-lg shadow-blue-900/50">
+                Browse Templates
+            </a>
+        </div>
+    </section>
+
+    <section id="browse" class="max-w-7xl mx-auto px-6 pb-24">
+        
+        <div class="flex flex-wrap justify-center gap-2 mb-12">
+            <button onclick="filterTemplates('All')" class="filter-btn px-4 py-2 rounded-full text-sm font-medium bg-white text-black transition-all">All</button>
+            <button onclick="filterTemplates('SaaS')" class="filter-btn px-4 py-2 rounded-full text-sm font-medium bg-surface text-zinc-400 hover:text-white border border-transparent hover:border-zinc-700 transition-all">SaaS</button>
+            <button onclick="filterTemplates('Portfolio')" class="filter-btn px-4 py-2 rounded-full text-sm font-medium bg-surface text-zinc-400 hover:text-white border border-transparent hover:border-zinc-700 transition-all">Portfolio</button>
+            <button onclick="filterTemplates('Commerce')" class="filter-btn px-4 py-2 rounded-full text-sm font-medium bg-surface text-zinc-400 hover:text-white border border-transparent hover:border-zinc-700 transition-all">Commerce</button>
+        </div>
+
+        <div id="grid-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            </div>
+
+    </section>
+
+    <footer class="border-t border-white/5 py-12 text-center text-zinc-500 text-sm">
+        <p>&copy; 2024 LumoraBlitz. Built by Fahad Malik.</p>
+    </footer>
+
+    <script>
+        // 1. THE DATA
+        const templates = [
+            {
+                title: "SaaS Elevate",
+                category: "SaaS",
+                image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80",
+                desc: "High conversion landing page for startups.",
+                tags: ["HTML", "Tailwind"]
+            },
+            {
+                title: "DevFolio Pro",
+                category: "Portfolio",
+                image: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=800&q=80",
+                desc: "Clean dark mode portfolio for engineers.",
+                tags: ["React", "Dark Mode"]
+            },
+            {
+                title: "Lumina Store",
+                category: "Commerce",
+                image: "https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?w=800&q=80",
+                desc: "Modern storefront with grid layout.",
+                tags: ["E-commerce", "Stripe"]
+            },
+            {
+                title: "DashBoard UI",
+                category: "SaaS",
+                image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
+                desc: "Admin panel with sidebar navigation.",
+                tags: ["Dashboard", "Admin"]
+            },
+            {
+                title: "Agency X",
+                category: "Portfolio",
+                image: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=800&q=80",
+                desc: "Creative agency portfolio design.",
+                tags: ["Agency", "Modern"]
+            },
+             {
+                title: "Crypto Land",
+                category: "SaaS",
+                image: "https://images.unsplash.com/photo-1621761191319-c6fb62004040?w=800&q=80",
+                desc: "Web3 and Crypto landing page.",
+                tags: ["Web3", "Crypto"]
+            }
+        ];
+
+        // 2. FUNCTION TO RENDER CARDS
+        function renderGrid(filter = 'All') {
+            const container = document.getElementById('grid-container');
+            container.innerHTML = ''; // Clear current grid
+
+            const filteredData = filter === 'All' 
+                ? templates 
+                : templates.filter(t => t.category === filter);
+
+            filteredData.forEach(item => {
+                const cardHTML = `
+                    <div class="group relative bg-surface border border-white/5 rounded-2xl overflow-hidden transition-all duration-300 card-hover">
+                        <div class="relative aspect-video overflow-hidden">
+                            <img src="${item.image}" alt="${item.title}" class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                <button class="bg-white text-black px-4 py-2 rounded-full text-sm font-bold flex items-center gap-2">
+                                    View Details <i data-lucide="external-link" class="w-4 h-4"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-5">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-lg font-bold text-white group-hover:text-blue-500 transition-colors">${item.title}</h3>
+                                <span class="text-[10px] uppercase font-bold tracking-wider text-zinc-500 border border-zinc-800 px-2 py-1 rounded">${item.category}</span>
+                            </div>
+                            <p class="text-zinc-400 text-sm mb-4 line-clamp-2">${item.desc}</p>
+                            <div class="flex gap-2">
+                                ${item.tags.map(tag => `<span class="text-xs text-zinc-500 bg-black px-2 py-1 rounded border border-white/5">${tag}</span>`).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += cardHTML;
+            });
+
+            // Re-initialize icons for new elements
+            lucide.createIcons();
+        }
+
+        // 3. FILTER LOGIC
+        function filterTemplates(category) {
+            renderGrid(category);
+            
+            // Update buttons styling
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                if(btn.innerText === category) {
+                    btn.className = "filter-btn px-4 py-2 rounded-full text-sm font-medium bg-white text-black transition-all";
+                } else {
+                    btn.className = "filter-btn px-4 py-2 rounded-full text-sm font-medium bg-surface text-zinc-400 hover:text-white border border-transparent hover:border-zinc-700 transition-all";
+                }
+            });
+        }
+
+        // Initial Render
+        renderGrid();
+        lucide.createIcons();
+    </script>
+</body>
+</html>
