@@ -1,150 +1,96 @@
-"use client";
+'use client';
 
-import { useState } from "react";
+import { useState } from 'react';
+import { Zap, Search, LayoutGrid } from 'lucide-react';
+import TemplateCard from '@/components/TemplateCard';
+import { templates } from '@/lib/data';
 
 export default function Home() {
-  const [search, setSearch] = useState("");
-  const [activeCategory, setActiveCategory] = useState("All");
+  const [activeTab, setActiveTab] = useState('All');
+  const tabs = ['All', 'SaaS', 'Portfolio', 'Commerce', 'Dashboard'];
 
-  const categories = [
-    "All",
-    "Portfolio",
-    "SaaS",
-    "Dashboard",
-    "Landing",
-    "Blog",
-    "E-commerce",
-    "Productivity",
-    "Admin",
-  ];
-
-  const templates = [
-    {
-      id: 1,
-      name: "Blitz Portfolio Dark",
-      category: "Portfolio",
-      tech: "Next.js + Tailwind",
-      desc: "Minimal dark portfolio with gradient hero & smooth animations",
-      preview: "dark-modern-portfolio",
-    },
-    {
-      id: 2,
-      name: "SaaS Launch Pro",
-      category: "SaaS",
-      tech: "React + Tailwind",
-      desc: "High-conversion landing with pricing, features & testimonials",
-      preview: "saas-landing",
-    },
-    {
-      id: 3,
-      name: "Lumora Task Manager",
-      category: "Productivity",
-      tech: "React",
-      desc: "Interactive todo app with add/delete & local storage",
-      preview: "task-manager",
-    },
-    // Add hundreds more here...
-  ];
-
-  const filtered = templates.filter((t) =>
-    (t.name.toLowerCase().includes(search.toLowerCase()) ||
-      t.desc.toLowerCase().includes(search.toLowerCase())) &&
-    (activeCategory === "All" || t.category === activeCategory)
-  );
+  const filtered = activeTab === 'All' 
+    ? templates 
+    : templates.filter(t => t.category === activeTab);
 
   return (
-    <div className="min-h-screen bg-gray-950 text-gray-100 font-sans">
-      {/* Hero */}
-      <header className="relative py-32 md:py-48 text-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-cyan-950/30 via-purple-950/30 to-transparent opacity-60" />
-        <div className="relative z-10 max-w-5xl mx-auto px-6">
-          <h1 className="text-6xl md:text-8xl font-black tracking-tight">
-            <span className="bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-              LumoraBlitz
-            </span>
-          </h1>
-          <p className="mt-6 text-3xl md:text-4xl font-light text-gray-300">
-            Lightning-Fast Premium Templates
-          </p>
-          <p className="mt-4 text-xl text-gray-400">
-            Hundreds of production-ready designs — copy, customize, launch in seconds.
-          </p>
+    <main className="min-h-screen pb-20">
+      
+      {/* Hero Section */}
+      <section className="relative pt-32 pb-20 px-6 text-center border-b border-white/5 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-900/20 via-background to-background">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-blue-400 mb-6 animate-fade-in">
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+          </span>
+          v2.0 is now live
         </div>
-      </header>
+        
+        <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6 bg-gradient-to-b from-white to-white/60 bg-clip-text text-transparent animate-slide-up">
+          Build faster with <br />
+          <span className="text-white">LumoraBlitz</span>
+        </h1>
+        
+        <p className="text-lg text-zinc-400 max-w-2xl mx-auto mb-10 animate-slide-up delay-100">
+          A curated collection of production-ready Next.js templates. 
+          Beautifully designed, expertly crafted, and ready to deploy.
+        </p>
 
-      {/* Search & Categories */}
-      <div className="sticky top-0 z-20 bg-gray-950/90 backdrop-blur-xl border-b border-gray-800/50 py-6">
-        <div className="max-w-6xl mx-auto px-6">
-          <input
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search templates (portfolio, SaaS, dashboard...)"
-            className="w-full p-5 bg-gray-900/70 border border-gray-700 rounded-2xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/30 transition mb-6"
-          />
-          <div className="flex flex-wrap gap-3 justify-center">
-            {categories.map((cat) => (
+        <div className="flex justify-center gap-4 animate-slide-up delay-200">
+          <button className="bg-primary hover:bg-blue-600 text-white px-8 py-3 rounded-xl font-semibold transition-all shadow-[0_0_20px_-5px_rgba(59,130,246,0.5)]">
+            Get Access
+          </button>
+          <button className="px-8 py-3 rounded-xl font-semibold text-zinc-300 hover:text-white border border-white/10 hover:bg-white/5 transition-all">
+            Documentation
+          </button>
+        </div>
+      </section>
+
+      {/* Filter & Grid */}
+      <section className="max-w-7xl mx-auto px-6 mt-16">
+        <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
+          
+          {/* Tabs */}
+          <div className="flex gap-2 overflow-x-auto no-scrollbar w-full md:w-auto">
+            {tabs.map((tab) => (
               <button
-                key={cat}
-                onClick={() => setActiveCategory(cat)}
-                className={`px-6 py-3 rounded-full text-sm font-medium transition-all ${
-                  activeCategory === cat
-                    ? "bg-gradient-to-r from-cyan-600 to-purple-600 shadow-lg shadow-cyan-500/20 text-white"
-                    : "bg-gray-800/50 hover:bg-gray-700/70 border border-gray-700 text-gray-300"
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-all whitespace-nowrap ${
+                  activeTab === tab 
+                    ? 'bg-white text-black' 
+                    : 'text-zinc-400 hover:text-white hover:bg-white/5'
                 }`}
               >
-                {cat}
+                {tab}
               </button>
             ))}
           </div>
+
+          {/* Search (Visual Only) */}
+          <div className="relative w-full md:w-64">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500" size={16} />
+            <input 
+              type="text" 
+              placeholder="Search templates..." 
+              className="w-full bg-surface border border-white/5 rounded-full py-2 pl-10 pr-4 text-sm text-white focus:outline-none focus:border-primary/50 transition-colors"
+            />
+          </div>
         </div>
-      </div>
 
-      {/* Template Grid */}
-      <main className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-        {filtered.length === 0 ? (
-          <p className="col-span-full text-center text-gray-400 text-2xl py-32">
-            No templates found — try another search!
-          </p>
-        ) : (
-          filtered.map((t) => (
-            <div
-              key={t.id}
-              className="group bg-gray-900/40 border border-gray-800 rounded-2xl overflow-hidden hover:border-cyan-500/50 hover:shadow-2xl hover:shadow-cyan-500/10 transition-all duration-300"
-            >
-              {/* Preview */}
-              <div className="h-56 bg-gradient-to-br from-gray-800 to-gray-950 flex items-center justify-center relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                <span className="text-2xl font-bold text-gray-400 group-hover:text-cyan-400 transition z-10">
-                  {t.name}
-                </span>
-              </div>
-
-              <div className="p-6">
-                <h3 className="text-xl font-semibold mb-2 group-hover:text-cyan-400 transition">
-                  {t.name}
-                </h3>
-                <p className="text-gray-400 text-sm mb-4 line-clamp-2">{t.desc}</p>
-                <div className="flex flex-wrap gap-2 mb-6">
-                  <span className="px-3 py-1 bg-cyan-900/30 text-cyan-400 rounded-full text-xs font-medium">
-                    {t.category}
-                  </span>
-                  <span className="px-3 py-1 bg-purple-900/30 text-purple-400 rounded-full text-xs font-medium">
-                    {t.tech}
-                  </span>
-                </div>
-                <button className="w-full py-3 bg-gradient-to-r from-cyan-600 to-purple-600 rounded-xl font-medium hover:from-cyan-500 hover:to-purple-500 transition shadow-md">
-                  View & Copy
-                </button>
-              </div>
-            </div>
-          ))
+        {/* Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filtered.map((item) => (
+            <TemplateCard key={item.id} item={item} />
+          ))}
+        </div>
+        
+        {filtered.length === 0 && (
+          <div className="text-center py-20 text-zinc-500">
+            No templates found in this category.
+          </div>
         )}
-      </main>
-
-      {/* Footer */}
-      <footer className="py-12 text-center text-gray-500 border-t border-gray-800 bg-gray-950/50">
-        <p>© 2026 LumoraBlitz • Crafted by Fahad Malik • Hundreds of templates added weekly</p>
-      </footer>
-    </div>
+      </section>
+    </main>
   );
 }
