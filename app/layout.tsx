@@ -1,10 +1,10 @@
-import './globals.css';  // ← Add this line
+import './globals.css';
 
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "LumoraBlitz - Premium Templates",
-  description: "Lightning-fast web templates arena",
+  title: "LumoraBlitz",
+  description: "Premium Templates Arena",
 };
 
 export default function RootLayout({
