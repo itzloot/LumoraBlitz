@@ -6,51 +6,90 @@ export default function Home() {
   const [search, setSearch] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
 
-  const categories = ["All", "Portfolio", "SaaS", "Dashboard", "Landing", "Blog", "E-commerce", "Productivity"];
+  const categories = [
+    "All",
+    "Portfolio",
+    "SaaS",
+    "Dashboard",
+    "Landing",
+    "Blog",
+    "E-commerce",
+    "Productivity",
+    "Admin",
+  ];
 
   const templates = [
-    { id: 1, name: "Blitz Portfolio Dark", category: "Portfolio", tech: "Next.js + Tailwind", desc: "Minimal dark portfolio with gradient hero" },
-    { id: 2, name: "SaaS Launch Pro", category: "SaaS", tech: "React + Tailwind", desc: "High-conversion landing with pricing" },
-    { id: 3, name: "Lumora Task Manager", category: "Productivity", tech: "React", desc: "Interactive todo with add/delete" },
+    {
+      id: 1,
+      name: "Blitz Portfolio Dark",
+      category: "Portfolio",
+      tech: "Next.js + Tailwind",
+      desc: "Minimal dark portfolio with gradient hero & smooth animations",
+      preview: "dark-modern-portfolio",
+    },
+    {
+      id: 2,
+      name: "SaaS Launch Pro",
+      category: "SaaS",
+      tech: "React + Tailwind",
+      desc: "High-conversion landing with pricing, features & testimonials",
+      preview: "saas-landing",
+    },
+    {
+      id: 3,
+      name: "Lumora Task Manager",
+      category: "Productivity",
+      tech: "React",
+      desc: "Interactive todo app with add/delete & local storage",
+      preview: "task-manager",
+    },
     // Add 100+ more later...
   ];
 
-  const filtered = templates.filter(t => 
-    (t.name.toLowerCase().includes(search.toLowerCase()) || t.desc.toLowerCase().includes(search.toLowerCase())) &&
+  const filtered = templates.filter((t) =>
+    (t.name.toLowerCase().includes(search.toLowerCase()) ||
+      t.desc.toLowerCase().includes(search.toLowerCase())) &&
     (activeCategory === "All" || t.category === activeCategory)
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-950 to-black text-white">
+    <div className="min-h-screen bg-gradient-to-br from-gray-950 via-black to-gray-900 text-white">
       {/* Hero */}
-      <header className="py-32 text-center">
-        <h1 className="text-7xl md:text-9xl font-black">
-          <span className="bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-            LumoraBlitz
-          </span>
-        </h1>
-        <p className="mt-6 text-3xl text-gray-300">Lightning-Fast Premium Templates</p>
-        <p className="mt-4 text-xl text-gray-400 max-w-4xl mx-auto">
-          Hundreds of ready-to-use designs — copy with one click.
-        </p>
+      <header className="relative py-32 md:py-48 overflow-hidden text-center">
+        <div className="absolute inset-0 bg-gradient-to-r from-cyan-900/20 via-purple-900/20 to-pink-900/20" />
+        <div className="relative z-10">
+          <h1 className="text-7xl md:text-9xl font-black tracking-tight">
+            <span className="bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+              LumoraBlitz
+            </span>
+          </h1>
+          <p className="mt-6 text-3xl md:text-5xl font-light text-gray-300">
+            Lightning-Fast Premium Templates
+          </p>
+          <p className="mt-4 text-xl md:text-2xl text-gray-400 max-w-4xl mx-auto">
+            Hundreds of production-ready designs — copy, customize, launch in seconds.
+          </p>
+        </div>
       </header>
 
-      {/* Search + Filters */}
-      <div className="sticky top-0 z-10 bg-gray-950/80 backdrop-blur-lg py-6">
+      {/* Search & Categories */}
+      <div className="sticky top-0 z-20 bg-gray-950/90 backdrop-blur-xl border-b border-gray-800 py-6">
         <div className="max-w-7xl mx-auto px-6">
           <input
             value={search}
-            onChange={e => setSearch(e.target.value)}
-            placeholder="Search templates..."
-            className="w-full p-5 bg-gray-900/70 border border-gray-700 rounded-2xl focus:ring-2 focus:ring-cyan-500/50 mb-6"
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Search templates (portfolio, SaaS, dashboard...)"
+            className="w-full p-5 bg-gray-900/70 border border-gray-700 rounded-2xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 transition mb-6"
           />
           <div className="flex flex-wrap gap-3 justify-center">
-            {categories.map(cat => (
+            {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
-                className={`px-6 py-3 rounded-full text-sm transition-all ${
-                  activeCategory === cat ? "bg-gradient-to-r from-cyan-600 to-purple-600" : "bg-gray-800/50 hover:bg-gray-700/50"
+                className={`px-6 py-3 rounded-full text-sm font-medium transition-all ${
+                  activeCategory === cat
+                    ? "bg-gradient-to-r from-cyan-600 to-purple-600 shadow-lg shadow-cyan-500/20"
+                    : "bg-gray-800/50 hover:bg-gray-700/50 border border-gray-700"
                 }`}
               >
                 {cat}
@@ -60,22 +99,49 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Grid */}
-      <main className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-3 gap-8">
-        {filtered.map(t => (
-          <div key={t.id} className="bg-gray-900/40 border border-gray-800 rounded-2xl p-6 hover:border-cyan-500/50 transition">
-            <h3 className="text-xl font-semibold mb-2">{t.name}</h3>
-            <p className="text-gray-400 text-sm mb-4">{t.desc}</p>
-            <div className="flex gap-2">
-              <span className="px-3 py-1 bg-cyan-900/30 text-cyan-400 rounded-full text-xs">{t.category}</span>
-              <span className="px-3 py-1 bg-purple-900/30 text-purple-400 rounded-full text-xs">{t.tech}</span>
+      {/* Templates Grid */}
+      <main className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+        {filtered.length === 0 ? (
+          <p className="col-span-full text-center text-gray-400 text-2xl py-32">
+            No templates found — try another search!
+          </p>
+        ) : (
+          filtered.map((t) => (
+            <div
+              key={t.id}
+              className="group bg-gray-900/40 border border-gray-800 rounded-2xl overflow-hidden hover:border-cyan-500/50 hover:shadow-2xl hover:shadow-cyan-500/10 transition-all duration-300"
+            >
+              {/* Preview Placeholder */}
+              <div className="h-56 bg-gradient-to-br from-gray-800 to-gray-950 flex items-center justify-center">
+                <span className="text-2xl font-bold text-gray-400 group-hover:text-cyan-400 transition">
+                  {t.name}
+                </span>
+              </div>
+              <div className="p-6">
+                <h3 className="text-xl font-semibold mb-2 group-hover:text-cyan-400 transition">
+                  {t.name}
+                </h3>
+                <p className="text-gray-400 text-sm mb-4 line-clamp-2">{t.desc}</p>
+                <div className="flex flex-wrap gap-2 mb-6">
+                  <span className="px-3 py-1 bg-cyan-900/30 text-cyan-400 rounded-full text-xs">
+                    {t.category}
+                  </span>
+                  <span className="px-3 py-1 bg-purple-900/30 text-purple-400 rounded-full text-xs">
+                    {t.tech}
+                  </span>
+                </div>
+                <button className="w-full py-3 bg-gradient-to-r from-cyan-600 to-purple-600 rounded-xl font-medium hover:from-cyan-500 hover:to-purple-500 transition shadow-md">
+                  View & Copy
+                </button>
+              </div>
             </div>
-          </div>
-        ))}
+          ))
+        )}
       </main>
 
-      <footer className="py-12 text-center text-gray-500 border-t border-gray-800">
-        © 2026 LumoraBlitz • By Fahad Malik
+      {/* Footer */}
+      <footer className="py-12 text-center text-gray-500 border-t border-gray-800 bg-gray-950/50">
+        <p>© 2026 LumoraBlitz • Crafted by Fahad Malik • Hundreds of templates added monthly</p>
       </footer>
     </div>
   );
