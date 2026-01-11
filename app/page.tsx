@@ -43,7 +43,7 @@ export default function Home() {
       desc: "Interactive todo app with add/delete & local storage",
       preview: "task-manager",
     },
-    // Add 100+ more later...
+    // Add more as you go...
   ];
 
   const filtered = templates.filter((t) =>
@@ -53,33 +53,33 @@ export default function Home() {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-950 via-black to-gray-900 text-white">
+    <div className="min-h-screen bg-gray-950 text-gray-100 font-sans">
       {/* Hero */}
-      <header className="relative py-32 md:py-48 overflow-hidden text-center">
-        <div className="absolute inset-0 bg-gradient-to-r from-cyan-900/20 via-purple-900/20 to-pink-900/20" />
-        <div className="relative z-10">
-          <h1 className="text-7xl md:text-9xl font-black tracking-tight">
+      <header className="relative py-32 md:py-48 text-center overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-cyan-950/20 via-purple-950/20 to-transparent opacity-50" />
+        <div className="relative z-10 max-w-5xl mx-auto px-6">
+          <h1 className="text-6xl md:text-8xl font-black tracking-tight">
             <span className="bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
               LumoraBlitz
             </span>
           </h1>
-          <p className="mt-6 text-3xl md:text-5xl font-light text-gray-300">
+          <p className="mt-6 text-3xl md:text-4xl font-light text-gray-300">
             Lightning-Fast Premium Templates
           </p>
-          <p className="mt-4 text-xl md:text-2xl text-gray-400 max-w-4xl mx-auto">
-            Hundreds of production-ready designs — copy, customize, launch in seconds.
+          <p className="mt-4 text-xl text-gray-400">
+            Discover hundreds of production-ready web designs — copy, customize, launch in seconds.
           </p>
         </div>
       </header>
 
       {/* Search & Categories */}
-      <div className="sticky top-0 z-20 bg-gray-950/90 backdrop-blur-xl border-b border-gray-800 py-6">
-        <div className="max-w-7xl mx-auto px-6">
+      <div className="sticky top-0 z-20 bg-gray-950/90 backdrop-blur-xl border-b border-gray-800/50 py-6">
+        <div className="max-w-6xl mx-auto px-6">
           <input
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search templates (portfolio, SaaS, dashboard...)"
-            className="w-full p-5 bg-gray-900/70 border border-gray-700 rounded-2xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 transition mb-6"
+            className="w-full p-5 bg-gray-900/70 border border-gray-700 rounded-2xl text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/30 transition mb-6"
           />
           <div className="flex flex-wrap gap-3 justify-center">
             {categories.map((cat) => (
@@ -88,8 +88,8 @@ export default function Home() {
                 onClick={() => setActiveCategory(cat)}
                 className={`px-6 py-3 rounded-full text-sm font-medium transition-all ${
                   activeCategory === cat
-                    ? "bg-gradient-to-r from-cyan-600 to-purple-600 shadow-lg shadow-cyan-500/20"
-                    : "bg-gray-800/50 hover:bg-gray-700/50 border border-gray-700"
+                    ? "bg-gradient-to-r from-cyan-600 to-purple-600 shadow-lg shadow-cyan-500/20 text-white"
+                    : "bg-gray-800/50 hover:bg-gray-700/70 border border-gray-700 text-gray-300"
                 }`}
               >
                 {cat}
@@ -99,7 +99,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Templates Grid */}
+      {/* Template Grid */}
       <main className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
         {filtered.length === 0 ? (
           <p className="col-span-full text-center text-gray-400 text-2xl py-32">
@@ -112,21 +112,23 @@ export default function Home() {
               className="group bg-gray-900/40 border border-gray-800 rounded-2xl overflow-hidden hover:border-cyan-500/50 hover:shadow-2xl hover:shadow-cyan-500/10 transition-all duration-300"
             >
               {/* Preview Placeholder */}
-              <div className="h-56 bg-gradient-to-br from-gray-800 to-gray-950 flex items-center justify-center">
-                <span className="text-2xl font-bold text-gray-400 group-hover:text-cyan-400 transition">
+              <div className="h-56 bg-gradient-to-br from-gray-800 to-gray-950 flex items-center justify-center relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                <span className="text-2xl font-bold text-gray-400 group-hover:text-cyan-400 transition z-10">
                   {t.name}
                 </span>
               </div>
+
               <div className="p-6">
                 <h3 className="text-xl font-semibold mb-2 group-hover:text-cyan-400 transition">
                   {t.name}
                 </h3>
                 <p className="text-gray-400 text-sm mb-4 line-clamp-2">{t.desc}</p>
                 <div className="flex flex-wrap gap-2 mb-6">
-                  <span className="px-3 py-1 bg-cyan-900/30 text-cyan-400 rounded-full text-xs">
+                  <span className="px-3 py-1 bg-cyan-900/30 text-cyan-400 rounded-full text-xs font-medium">
                     {t.category}
                   </span>
-                  <span className="px-3 py-1 bg-purple-900/30 text-purple-400 rounded-full text-xs">
+                  <span className="px-3 py-1 bg-purple-900/30 text-purple-400 rounded-full text-xs font-medium">
                     {t.tech}
                   </span>
                 </div>
