@@ -43,7 +43,7 @@ export default function Home() {
       desc: "Interactive todo app with add/delete & local storage",
       preview: "task-manager",
     },
-    // Add more as you go...
+    // Add hundreds more here...
   ];
 
   const filtered = templates.filter((t) =>
@@ -56,7 +56,7 @@ export default function Home() {
     <div className="min-h-screen bg-gray-950 text-gray-100 font-sans">
       {/* Hero */}
       <header className="relative py-32 md:py-48 text-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-cyan-950/20 via-purple-950/20 to-transparent opacity-50" />
+        <div className="absolute inset-0 bg-gradient-to-br from-cyan-950/30 via-purple-950/30 to-transparent opacity-60" />
         <div className="relative z-10 max-w-5xl mx-auto px-6">
           <h1 className="text-6xl md:text-8xl font-black tracking-tight">
             <span className="bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
@@ -67,7 +67,7 @@ export default function Home() {
             Lightning-Fast Premium Templates
           </p>
           <p className="mt-4 text-xl text-gray-400">
-            Discover hundreds of production-ready web designs — copy, customize, launch in seconds.
+            Hundreds of production-ready designs — copy, customize, launch in seconds.
           </p>
         </div>
       </header>
@@ -111,7 +111,7 @@ export default function Home() {
               key={t.id}
               className="group bg-gray-900/40 border border-gray-800 rounded-2xl overflow-hidden hover:border-cyan-500/50 hover:shadow-2xl hover:shadow-cyan-500/10 transition-all duration-300"
             >
-              {/* Preview Placeholder */}
+              {/* Preview */}
               <div className="h-56 bg-gradient-to-br from-gray-800 to-gray-950 flex items-center justify-center relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                 <span className="text-2xl font-bold text-gray-400 group-hover:text-cyan-400 transition z-10">
@@ -143,7 +143,7 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="py-12 text-center text-gray-500 border-t border-gray-800 bg-gray-950/50">
-        <p>© 2026 LumoraBlitz • Crafted by Fahad Malik • Hundreds of templates added monthly</p>
+        <p>© 2026 LumoraBlitz • Crafted by Fahad Malik • Hundreds of templates added weekly</p>
       </footer>
     </div>
   );
